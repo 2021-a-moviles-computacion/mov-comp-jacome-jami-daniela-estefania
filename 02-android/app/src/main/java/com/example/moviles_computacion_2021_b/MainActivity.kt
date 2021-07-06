@@ -15,15 +15,21 @@ class MainActivity : AppCompatActivity() {
             R.id.btn_ciclo_vida
         )
 
-        botonIrACicloVida.setOnClickListener {
-            abrirCicloVida()
-        }
+        botonIrACicloVida.setOnClickListener { abrirActividad(ACicloVida::class.java) }
+
+        val botonIrListView= findViewById<Button>(
+            R.id.btn_ir_list_view
+        )
+
+        botonIrListView.setOnClickListener { abrirActividad(BListView::class.java) }
     }
 
-    fun abrirCicloVida(){
+    fun abrirActividad(
+        clase: Class<*>
+    ){
         val intentExplicito = Intent(
             this,
-            ACicloVida::class.java
+            clase
         )
         startActivity(intentExplicito)
     }
