@@ -242,8 +242,9 @@ class SqliteHelperUsuario (
         valoresAGuardar.put("nombre_cli", nombre_cli)
         valoresAGuardar.put("apellido_cli", apellido_cli)
         valoresAGuardar.put("correo_cli", correo_cli)
-        valoresAGuardar.put("fechaNacimiento_cli", fechaNacimiento_cli)
         valoresAGuardar.put("telefono_cli", telefono_cli)
+        valoresAGuardar.put("fechaNacimiento_cli", fechaNacimiento_cli)
+
         val resultadoEscritura: Long = conexionExcritura
             .insert(
                 "CLI",
@@ -262,13 +263,17 @@ class SqliteHelperUsuario (
                           cedula :Long):Boolean {
 
         val conexionEscritura = writableDatabase
-        var valoresActualizar = ContentValues()
+        var valoresActualizar = ContentValues(5)
         valoresActualizar.put("nombre_cli", nombre)
         valoresActualizar.put("apellido_cli",apellido)
         valoresActualizar.put("correo_cli", correo_cli)
         valoresActualizar.put("fechaNacimiento_cli",fechaNacimiento)
         valoresActualizar.put("telefono_cli",telefono_cli)
 
+        Log.i(
+            "bd",
+            "Cliente ingresado,  ${valoresActualizar}"
+        )
 
 
         val resultadoActualizacion = conexionEscritura.update(
@@ -290,6 +295,7 @@ class SqliteHelperUsuario (
                 arrayOf(cedulaCLiente.toString())
             )
         conexionEscritura.close()
+
         return if (resultadoEliminacion.toInt() == -1) false else true
     }
 

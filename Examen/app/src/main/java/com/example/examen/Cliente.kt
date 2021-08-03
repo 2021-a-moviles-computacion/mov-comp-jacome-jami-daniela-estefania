@@ -36,7 +36,6 @@ class Cliente : AppCompatActivity() {
 
         if(BaseDatos.base != null) {
             val clientes = BaseDatos.base!!.consultarClientePorProveedor(ruc)
-
             adapter = ArrayAdapter(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -103,6 +102,7 @@ class Cliente : AppCompatActivity() {
                     )
                 }
                 Log.i("list-view","Editar ")
+
                 return true
             }
 
@@ -117,12 +117,13 @@ class Cliente : AppCompatActivity() {
                         "Si",
                         DialogInterface.OnClickListener{
                                 dialog, which ->
-                            BaseDatos.base!!.eliminarCliente(Cliente.cedulaCLiente)
+                            BaseDatos.base!!.eliminarCliente(cedulaCLiente)
                             adapter?.remove(adapter!!.getItem(posicionCliSeleccionado));
                         }
                     )
                     builder.setNegativeButton("No", null)
                     val eliminar = builder.create()
+                    //abrirActividad(MainActivity::class.java)
                     eliminar.show()
                     Log.i("list-view","Eliminar ")
 

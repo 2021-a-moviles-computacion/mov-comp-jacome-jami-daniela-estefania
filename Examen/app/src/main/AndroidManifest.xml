@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Examen">
-        <activity android:name=".CrearCliente"></activity>
+        <activity android:name=".CrearCliente"/>
         <activity android:name=".Cliente" />
         <activity android:name=".ActualizarProveedor" />
+        <activity android:name=".ActualizarCliente" />
         <activity android:name=".CrearProveedor" />
         <activity android:name=".Proveedor" />
         <activity android:name=".MainActivity">

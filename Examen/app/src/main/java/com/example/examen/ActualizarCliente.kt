@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 
 class ActualizarCliente : AppCompatActivity() {
@@ -28,7 +27,7 @@ class ActualizarCliente : AppCompatActivity() {
 
         val botonAceptar = findViewById<Button>(R.id.btn_actualizar_editar_Cli)
 
-        cedulaCliente.setText(cli?.cedula_cli.toString())
+        cedulaCliente.setText(cli!!.cedula_cli.toString())
         nombreCliente.setText(cli?.nombre_cli)
         apellidoCliente.setText(cli?.apellido_cli)
         correoCliente.setText(cli?.correo_cli)
@@ -48,7 +47,7 @@ class ActualizarCliente : AppCompatActivity() {
                 ) {
                     Log.i(
                         "bd",
-                        "Cliente ingresado,  ${cli?.cedula_cli} ${nombreCliente.text.toString()}"
+                        "Cliente ingresado,  ${cli.toString()} ${nombreCliente.text} ${telefonoCliente.text.toString()}"
                     )
                 }
 

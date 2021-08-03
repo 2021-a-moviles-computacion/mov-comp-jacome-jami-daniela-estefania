@@ -14,6 +14,7 @@ class CrearCliente : AppCompatActivity() {
         setContentView(R.layout.activity_crear_cliente)
 
         BaseDatos.base = SqliteHelperUsuario (this)
+
         val rucProveedor = intent.getLongExtra("ruc",0)
         println("ruuuuc"+rucProveedor)
         val cedulaCliente = findViewById<EditText>(R.id.etxtCedulaCli)
@@ -36,7 +37,7 @@ class CrearCliente : AppCompatActivity() {
                         telefonoCliente.text.toString(),
                         rucProveedor
                     )) !=null){
-                    Log.i("bd","Cliente ingresado,  ${cedulaCliente.text.toString().toInt()} ${nombreCliente.text.toString()}")
+                    Log.i("bd","Cliente ingresado,  ${cedulaCliente.text.toString().toInt()} ${nombreCliente.text.toString()} ${telefonoCliente.text.toString()}")
                 }
 
             }
@@ -48,7 +49,9 @@ class CrearCliente : AppCompatActivity() {
             fechaNacimientoCliente.setText("")
             telefonoCliente.setText("")
 
-            Log.i("bd",BaseDatos.base.toString())
+            Log.i("bd",
+                BaseDatos.base!!.consultarClientePorProveedor(rucProveedor.toLong()).toString()
+            )
             abrirActividad(MainActivity::class.java)
         }
 
