@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hola_mundo">Naruto</string>
+    <string name="boton">CICLO VIDA</string>
+    <string name="list">LIST VIEW</string>
+</resources>
