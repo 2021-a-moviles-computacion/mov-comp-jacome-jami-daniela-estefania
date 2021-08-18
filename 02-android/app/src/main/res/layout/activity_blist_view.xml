@@ -7,7 +7,7 @@
     tools:context=".BListView">
 
     <ListView
-        android:id="@+id/ltv_ejemplo"
+        android:id="@+id/ltv_clientes"
         android:layout_width="318dp"
         android:layout_height="193dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,13 +18,13 @@
         app:layout_constraintVertical_bias="0.094" />
 
     <Button
-        android:id="@+id/btn_anadir_numero"
+        android:id="@+id/btn_crearProv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="Añadir número"
-        app:layout_constraintEnd_toEndOf="@+id/ltv_ejemplo"
+        app:layout_constraintEnd_toEndOf="@+id/ltv_clientes"
         app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="@+id/ltv_ejemplo"
-        app:layout_constraintTop_toBottomOf="@+id/ltv_ejemplo" />
+        app:layout_constraintStart_toStartOf="@+id/ltv_clientes"
+        app:layout_constraintTop_toBottomOf="@+id/ltv_clientes" />
 </androidx.constraintlayout.widget.ConstraintLayout>

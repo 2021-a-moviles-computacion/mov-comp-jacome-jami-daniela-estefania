@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">moviles-computacion-2021-b</string>
-    <string name="hola_mundo">HOLA MUNDO </string>
-    <string name="boton">CICLO VIDA</string>
-    <string name="list">LIST VIEW</string>
+    <string name="app_name" translatable="false">moviles-computacion-2021-b</string>
+    <string name="hola_mundo">HOLA MUNDO</string>
+    <string-array name="string_array_opciones_dialogo">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>

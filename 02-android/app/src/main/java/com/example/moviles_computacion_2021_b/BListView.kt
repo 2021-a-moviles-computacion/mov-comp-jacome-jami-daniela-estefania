@@ -1,46 +1,80 @@
 package com.example.moviles_computacion_2021_b
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.ContextMenu
+import android.view.MenuItem
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import androidx.appcompat.app.AppCompatActivity
 
 class BListView : AppCompatActivity() {
+    var posicionItemSeleccionado = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_blist_view)
-
-        val arregloNumeros = arrayListOf<Int>(1,2,3)
-
-        val adaptor = ArrayAdapter(
-            this, //contexto
-            android.R.layout.simple_list_item_1, //layour (visual)
-            arregloNumeros //arreglo
+        val arregloNumeros = BBaseDatosMemoria.arregloBEntrenador
+        val adaptador = ArrayAdapter(
+            this, // Contexto
+            android.R.layout.simple_list_item_1, // Layout (visual)
+            arregloNumeros // Arreglo
         )
-
-        val listViewEjemplo = findViewById<ListView>(R.id.ltv_ejemplo)
-        listViewEjemplo.adapter=adaptor
-
-        val botonAnadirNumero = findViewById<Button>(R.id.btn_anadir_numero)
+        val listViewEjemplo = findViewById<ListView>(R.id.ltv_clientes)
+        listViewEjemplo.adapter = adaptador
+        val botonAnadirNumero = findViewById<Button>(R.id.btn_crearProv)
         botonAnadirNumero.setOnClickListener {
             anadirItemsAlListView(
-                1,
+                BEntrenador("Prueba", "d@d.com",null),
                 arregloNumeros,
-                adaptor
+                adaptador
             )
-
         }
+        listViewEjemplo
+            .setOnItemLongClickListener { adapterView, view, posicion, id ->
 
-      /*  listViewEjemplo.setOnItemClickListener { adapterView, view, i, id ->
-            Log.i("list-view","Dio click ${i}")
-            return@setOnItemClickListener
-        }*/
+                Log.i("list-view", "Dio click ${posicion}")
+                val builder = AlertDialog.Builder(this)
 
-        registerForContextMenu(listViewEjemplo)
+                builder.setTitle("Titulo")
+               // builder.setMessage("Mensaje")
+
+                val seleccionUsuario = booleanArrayOf(
+                    true,
+                    false,
+                    false
+                )
+
+                val opciones = resources.getStringArray(R.array.string_array_opciones_dialogo)
+
+                builder.setMultiChoiceItems(
+                    opciones,
+                    seleccionUsuario,
+                    { dialog, which, isChecked ->
+                        Log.i("list-view", "${which} ${isChecked}")
+                    }
+                )
+                builder.setPositiveButton(
+                    "Si",
+                    DialogInterface.OnClickListener { dialog, which ->
+                        Log.i("list-view", "Si")
+                    }
+                )
+                builder.setNegativeButton(
+                    "No",
+                    null
+                )
+                val dialogo = builder.create()
+                dialogo.show()
+                return@setOnItemLongClickListener true
+
+            }
+
+       //registerForContextMenu(listViewEjemplo)
 
     }
 
@@ -50,16 +84,43 @@ class BListView : AppCompatActivity() {
         menuInfo: ContextMenu.ContextMenuInfo?
     ) {
         super.onCreateContextMenu(menu, v, menuInfo)
-
         val inflater = menuInflater
-        inflater.inflate(R.menu.menu,menu)
+        inflater.inflate(R.menu.menu, menu)
+
+        val info = menuInfo as AdapterView.AdapterContextMenuInfo
+        val id = info.position
+        posicionItemSeleccionado = id
+        Log.i("list-view", "List view ${posicionItemSeleccionado}")
+        Log.i("list-view", "Entrenador ${BBaseDatosMemoria.arregloBEntrenador[id]}")
     }
     fun anadirItemsAlListView(
-        valor: Int,
-        arreglo: ArrayList<Int>,
-        adaptador: ArrayAdapter<Int>
+        valor: BEntrenador,
+        arreglo: ArrayList<BEntrenador>,
+        adaptador: ArrayAdapter<BEntrenador>
     ) {
         arreglo.add(valor)
         adaptador.notifyDataSetChanged() // actualiza la interfaz
     }
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        return when(item?.itemId){
+            // Editar
+            R.id.mi_editar -> {
+                Log.i("list-view","Editar ${BBaseDatosMemoria.arregloBEntrenador[
+                        posicionItemSeleccionado
+                ]}")
+                return true
+            }
+            // Eliminar
+            R.id.mi_eliminar -> {
+                Log.i("list-view","Eliminar ${BBaseDatosMemoria.arregloBEntrenador[
+                        posicionItemSeleccionado
+                ]}")
+                return true
+            }
+
+            else -> super.onContextItemSelected(item)
+        }
+    }
+
+
 }
