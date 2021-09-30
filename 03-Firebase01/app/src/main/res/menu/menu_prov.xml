@@ -9,11 +9,9 @@
     <item
         android:id="@+id/mi_ver_prov"
         android:title="Ver" />
-<<<<<<< HEAD
 
     <item
         android:id="@+id/mi_ubicacion_prov"
         android:title="Ubicacion" />
-=======
->>>>>>> main
+
 </menu>

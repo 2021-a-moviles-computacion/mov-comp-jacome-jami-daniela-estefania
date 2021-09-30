@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FirebaseUNO">
-        <activity android:name=".PEditarProveedor"></activity>
+        <activity android:name=".PEditarProveedor"/>
         <activity android:name=".QCliente" />
         <activity android:name=".QCrearCliente" />
         <activity android:name=".PCrearProveedor" />
@@ -28,9 +28,7 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+
 
         <activity android:name=".FMapsActivity" />
         <activity android:name=".EOrdenes" />

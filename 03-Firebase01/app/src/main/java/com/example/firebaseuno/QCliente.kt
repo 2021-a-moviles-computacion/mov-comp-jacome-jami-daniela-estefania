@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.firebaseuno.dto.FirestoreClienteDto
 import com.example.firebaseuno.dto.FirestoreProveedorDto
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -33,6 +34,7 @@ class QCliente : AppCompatActivity() {
 
         proveedor = intent.getParcelableExtra<FirestoreProveedorDto>("proveedor")
         Log.i("proveeodor","proveedor ruc: ${proveedor!!.ruc_prov}")
+
         consultarCliente()
 
         val botonCrear = findViewById<Button>(R.id.btn_crearCli)
@@ -55,53 +57,45 @@ class QCliente : AppCompatActivity() {
         startActivity(intentExplicito)
     }
 
-    fun consultarCliente() {
+    fun consultarCliente(){
 
         val db = Firebase.firestore
-        var refProveedor = db
+        var refproveedor = db
             .collection("cliente")
-        refProveedor
-            .whereEqualTo("uid_proveedor", proveedor!!.uid)
+        refproveedor
+            .whereEqualTo("proveedorRuc",proveedor!!.ruc_prov)
             .get()
             .addOnSuccessListener {
                 //Log.i("consultas","${it.documents}")
-                for (documentos in it) {
-                    /*
-                    val ubicacionStore: HashMap<String, *> =
-                        documentos.data["ubicacion"] as HashMap<String, *>
-*/
+                for (clientes in it){
+                    println(clientes)
+                    //val ubicacionStore: HashMap<String, *> = clientes.data["ubicacion"] as HashMap<String, *>
+                    //Log.i("consultarcliente","${ubicacionStore["latitude"]}")
 
                     arrayClientes.add(
                         FirestoreClienteDto(
-                            documentos.id,
-                            documentos.data["uidProveedor"].toString(),
-                            documentos.data["rucProveedor"].toString().toLong(),
-                            documentos.data["cedulaCliente"].toString().toLong(),
-                            documentos.data["nombreCliente"].toString(),
-                            documentos.data["apellidoCliente"].toString(),
-                            documentos.data["correoCliente"].toString(),
-                            documentos.data["fechaNacimientoCliente"].toString(),
-                            documentos.data["telefonoCliente"].toString()
-                           /* LatLng(
-                                ubicacionStore["latitude"].toString().toDouble(),
-                                ubicacionStore["longitude"].toString().toDouble()
-                            ),
-                            */
-
+                            clientes.id.toString(),
+                            clientes.data["idProveedor"].toString(),
+                            clientes.data["cedulaCliente"].toString().toLong(),
+                            clientes.data["proveedorRuc"].toString().toLong(),
+                            clientes.data["nombreCliente"].toString(),
+                            clientes.data["apellidoCliente"].toString(),
+                            clientes.data["correoCliente"].toString(),
+                            clientes.data["fechaNacimientoCliente"].toString(),
+                            clientes.data["telefonoCliente"].toString()
                         )
                     )
 
-                    adapter =
-                        ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayClientes)
-                    val listViewProveedor = findViewById<ListView>(R.id.ltv_clientes)
-                    listViewProveedor.adapter = adapter
+                    adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayClientes)
+                    val listViewproveedor = findViewById<ListView>(R.id.ltv_clientes)
+                    listViewproveedor.adapter = adapter
 
-                    registerForContextMenu(listViewProveedor)
+                    registerForContextMenu(listViewproveedor)
 
                 }
 
             }
-            .addOnFailureListener {}
+            .addOnFailureListener{}
 
     }
 
@@ -123,55 +117,39 @@ class QCliente : AppCompatActivity() {
         Log.i("list-view", "Cedula cliwnte ${cedulaCLiente}")
     }
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        var CasaSelect = arrayClientes[posicionItemSelecionado]
+        var ClienteSelec = arrayClientes[posicionItemSelecionado]
 
         return when(item?.itemId){
             // Editar
 
             R.id.mi_editar_cli -> {
-           /*     if( BaseDatos.base != null){
-                    abrirActividadParametros(
-                        ActualizarCliente::class.java,
-                        cliente
-                    )
-                }
-                Log.i("list-view","Editar ")
-*/
+                println("EDITAR")
+                abrirActividadConParametros(QEditarCliente::class.java,ClienteSelec,proveedor!!)
                 return true
             }
 
             // Eliminar
             R.id.mi_eliminar_cli -> {
-          /*      if( BaseDatos.base != null){
-                    val builder = AlertDialog.Builder(this)
-                    builder.setTitle("Eliminar")
-                    builder.setMessage("¿Desea eliminar el cliente seleccionado?")
+                val db = Firebase.firestore
+                var refProv = db
+                    .collection("usuario")
 
-                    builder.setPositiveButton(
-                        "Si",
-                        DialogInterface.OnClickListener{
-                                dialog, which ->
-                            BaseDatos.base!!.eliminarCliente(cedulaCLiente)
-                            adapter?.remove(adapter!!.getItem(posicionItemSelecionado));
-                        }
-                    )
-                    builder.setNegativeButton("No", null)
-                    val eliminar = builder.create()
-                    //abrirActividad(MainActivity::class.java)
-                    eliminar.show()
-                    Log.i("list-view","Eliminar ")
+                refProv.document(ClienteSelec.uid.toString())
+                    .delete()
+                    .addOnSuccessListener {
+                        adapter?.remove(adapter!!.getItem(posicionItemSelecionado));
+                        adapter?.notifyDataSetChanged()
+                    }
+                    .addOnFailureListener { e -> Log.w("list-view", "Error deleting document", e) }
 
-                }
-*/
-                return true
-            }
+                return true }
+
 
             else -> super.onContextItemSelected(item)
-
         }
 
     }
-    fun abrirActividadConParametros(
+    fun abrirActividadConParametros(//1
         clase: Class<*>,
         proveedor: FirestoreProveedorDto,
     ){
@@ -179,7 +157,34 @@ class QCliente : AppCompatActivity() {
             this,
             clase,
         )
-        //intentExplicito.putExtra("nombre","Adrian")
+        intentExplicito.putExtra("proveedor",proveedor)
+        startActivityForResult(intentExplicito,CODIGO_RESPUESTA_INTENT_EXPLICITO)
+
+    }
+    fun abrirActividadConParametros(//2
+        clase: Class<*>,
+        cliente: FirestoreClienteDto,
+    ){
+        val intentExplicito = Intent(
+            this,
+            clase,
+        )
+        intentExplicito.putExtra("cliente",cliente)
+        startActivityForResult(intentExplicito,CODIGO_RESPUESTA_INTENT_EXPLICITO)
+
+    }
+
+    fun abrirActividadConParametros(//3
+        clase: Class<*>,
+        cliente: FirestoreClienteDto,
+        proveedor: FirestoreProveedorDto,
+
+    ){
+        val intentExplicito = Intent(
+            this,
+            clase,
+        )
+        intentExplicito.putExtra("cliente",cliente)
         intentExplicito.putExtra("proveedor",proveedor)
         startActivityForResult(intentExplicito,CODIGO_RESPUESTA_INTENT_EXPLICITO)
 

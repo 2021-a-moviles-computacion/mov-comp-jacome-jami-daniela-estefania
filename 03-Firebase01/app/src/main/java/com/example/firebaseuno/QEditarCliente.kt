@@ -6,21 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import com.example.firebaseuno.R
 import com.example.firebaseuno.dto.FirestoreClienteDto
 import com.example.firebaseuno.dto.FirestoreProveedorDto
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class QCrearCliente : AppCompatActivity() {
+class QEditarCliente : AppCompatActivity() {
     val CODIGO_RESPUESTA_INTENT_EXPLICITO = 401
     var proveedorIntent: FirestoreProveedorDto?=null
-
-    var ubicacionMapa: LatLng? = null
-    private lateinit var mapa: GoogleMap
-    var permisos = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,5 +87,4 @@ class QCrearCliente : AppCompatActivity() {
         )
         intentExplicito.putExtra("proveedor",proveedor)
         startActivityForResult(intentExplicito,CODIGO_RESPUESTA_INTENT_EXPLICITO)
-    }
-}
+    }}
