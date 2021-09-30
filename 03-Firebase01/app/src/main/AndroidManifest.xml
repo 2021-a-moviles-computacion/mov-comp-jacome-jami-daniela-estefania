@@ -18,6 +18,7 @@
         <activity android:name=".PEditarProveedor"/>
         <activity android:name=".QCliente" />
         <activity android:name=".QCrearCliente" />
+        <activity android:name=".QEditarCliente" />
         <activity android:name=".PCrearProveedor" />
         <activity android:name=".Proveedores" />
         <!--

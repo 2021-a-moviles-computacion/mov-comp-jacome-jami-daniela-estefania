@@ -134,13 +134,13 @@ class Proveedores : AppCompatActivity() {
 
             // Eliminar
             R.id.mi_eliminar_prov -> {
-                Log.i("list-view","Eliminar ${ProvSelect}")
+                println("ELIMINAR"+ProvSelect);
                 val clientesEliminar = arrayListOf<String>()
                 val db = Firebase.firestore
                 var refCli = db
                     .collection("cliente")
                 refCli
-                    .whereEqualTo("ruc_prov_cli",ProvSelect.uid.toString())
+                    .whereEqualTo("idProveedor",ProvSelect.uid.toString())
                     .get()
                     .addOnSuccessListener {
                         for(cli in it){
