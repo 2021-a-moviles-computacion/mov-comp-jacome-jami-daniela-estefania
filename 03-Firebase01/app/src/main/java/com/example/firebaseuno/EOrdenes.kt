@@ -75,7 +75,8 @@ class EOrdenes : AppCompatActivity() {
         referencia
             .add(nuevaOrden)
             .addOnSuccessListener {
-
+                txtTotal.setText("0.0")
+                listViewProductos.adapter = null
             }
 
 

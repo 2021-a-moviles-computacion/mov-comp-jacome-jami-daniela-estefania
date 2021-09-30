@@ -62,6 +62,15 @@ class MainActivity : AppCompatActivity() {
             )
             startActivity(intent)
         }
+
+        val botonIrMapa = findViewById<Button>(R.id.btn_ir_mapa)
+        botonIrMapa.setOnClickListener {
+            val intent = Intent(
+                this,
+                FMapsActivity::class.java
+            )
+            startActivity(intent)
+        }
     }
 
     fun llamarLoginUsuario() {
@@ -182,6 +191,7 @@ class MainActivity : AppCompatActivity() {
         val botonProducto = findViewById<Button>(R.id.btn_producto)
         val botonRestaurante = findViewById<Button>(R.id.btn_restaurante)
         val botonOrden = findViewById<Button>(R.id.btn_ordenes)
+        val botonMapa = findViewById<Button>(R.id.btn_ir_mapa)
 
 
         if(BAuthUsuario.usuario != null){
@@ -191,6 +201,7 @@ class MainActivity : AppCompatActivity() {
             botonProducto.visibility = View.VISIBLE
             botonRestaurante.visibility = View.VISIBLE
             botonOrden.visibility = View.VISIBLE
+            botonMapa.visibility = View.VISIBLE
 
         }else{
             textViewBienvenida.text = "Ingresa al aplicativo"
@@ -199,6 +210,7 @@ class MainActivity : AppCompatActivity() {
             botonProducto.visibility = View.INVISIBLE
             botonRestaurante.visibility = View.INVISIBLE
             botonOrden.visibility = View.INVISIBLE
+            botonMapa.visibility = View.INVISIBLE
         }
     }
     fun solicitarSalirDelAplicativo(){
