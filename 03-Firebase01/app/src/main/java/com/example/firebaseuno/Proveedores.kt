@@ -27,11 +27,13 @@ class Proveedores : AppCompatActivity() {
     val CODIGO_RESPUESTA_INTENT_EXPLICITO = 401
 
     var adapter: ArrayAdapter<FirestoreProveedorDto>? = null
+
     var arrayProveedores = arrayListOf<FirestoreProveedorDto>()
 
-    var ubicacionMapa: LatLng? = null
-    private lateinit var mapa: GoogleMap
-    var permisos = false
+
+    companion object{
+        var ruc_proveedor: Long = 0
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,9 +79,9 @@ class Proveedores : AppCompatActivity() {
                             proveedor.data["nombreProveedor"].toString(),
                             proveedor.data["ciudadProveedor"].toString(),
                             proveedor.data["correoProveedor"].toString(),
-                            proveedor.data["telefonoProveedor"].toString() ,
+                            proveedor.data["telefonoProveedor"].toString(),
                             proveedor.data["latitudProveedor"].toString(),
-                            proveedor.data["longitudProveedor"].toString()
+                            proveedor.data["longitudProveedor"].toString(),
                             )
                     )
 

@@ -22,24 +22,23 @@ class QCliente : AppCompatActivity() {
     companion object{
         var cedulaCLiente:Long = 0
     }
-
+    var proveedor: FirestoreProveedorDto?=null
     var arrayClientes = arrayListOf<FirestoreClienteDto>()
     val CODIGO_RESPUESTA_INTENT_EXPLICITO = 401
-    var proveedor: FirestoreProveedorDto?=null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qcliente)
 
-        proveedor= intent.getParcelableExtra<FirestoreProveedorDto>("proveedor")
-        Log.i("proveeodor","Proveedor: ${proveedor!!.ruc_prov}")
-
+        proveedor = intent.getParcelableExtra<FirestoreProveedorDto>("proveedor")
+        Log.i("proveeodor","proveedor ruc: ${proveedor!!.ruc_prov}")
         consultarCliente()
 
         val botonCrear = findViewById<Button>(R.id.btn_crearCli)
         botonCrear
             .setOnClickListener {
-                abrirActividad(QCrearCliente::class.java)
+                abrirActividadConParametros(QCrearCliente::class.java,proveedor!!)
             }
 
 
@@ -94,10 +93,10 @@ class QCliente : AppCompatActivity() {
 
                     adapter =
                         ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayClientes)
-                    val listViewCliente = findViewById<ListView>(R.id.ltv_clientes)
-                    listViewCliente.adapter = adapter
+                    val listViewProveedor = findViewById<ListView>(R.id.ltv_clientes)
+                    listViewProveedor.adapter = adapter
 
-                    registerForContextMenu(listViewCliente)
+                    registerForContextMenu(listViewProveedor)
 
                 }
 
@@ -121,9 +120,10 @@ class QCliente : AppCompatActivity() {
         posicionItemSelecionado = id
         cedulaCLiente = adapter!!.getItem(posicionItemSelecionado)?.cedula_cli!!.toLong()
         Log.i("list-view", "List view ${posicionItemSelecionado}")
+        Log.i("list-view", "Cedula cliwnte ${cedulaCLiente}")
     }
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        var cliente = adapter!!.getItem(posicionItemSelecionado)
+        var CasaSelect = arrayClientes[posicionItemSelecionado]
 
         return when(item?.itemId){
             // Editar

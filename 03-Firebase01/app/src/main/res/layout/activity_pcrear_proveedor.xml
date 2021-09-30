@@ -11,7 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="155dp"
+<<<<<<< HEAD
         android:layout_marginTop="36dp"
+=======
+        android:layout_marginTop="56dp"
+>>>>>>> main
         android:layout_marginEnd="155dp"
         android:text="Proveedor"
         android:textSize="20sp"
@@ -19,6 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<<<<<<< HEAD
     <EditText
         android:id="@+id/etxtRUCProv"
         android:layout_width="wrap_content"
@@ -37,6 +42,15 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="176dp"
         android:text="Correo:"
+=======
+    <TextView
+        android:id="@+id/txvRUCCli"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="50dp"
+        android:text="RUC:"
+>>>>>>> main
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/etxtRUCProv"
         app:layout_constraintHorizontal_bias="0.0"
@@ -44,6 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txvTituloProv" />
 
     <EditText
+<<<<<<< HEAD
         android:id="@+id/etxtTelefonoProv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,6 +98,25 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="232dp"
         android:text="Telefono:"
+=======
+        android:id="@+id/etxtRUCProv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="125dp"
+        android:layout_marginEnd="50dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txvNombreProv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="105dp"
+        android:text="Nombre"
+>>>>>>> main
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/etxtRUCProv"
         app:layout_constraintHorizontal_bias="0.0"
@@ -93,13 +127,19 @@
         android:id="@+id/etxtNombreProv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_marginTop="140dp"
         android:layout_marginEnd="48dp"
+=======
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="50dp"
+>>>>>>> main
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<<<<<<< HEAD
     <EditText
         android:id="@+id/etxtLongitud"
         android:layout_width="72dp"
@@ -143,28 +183,13 @@
         android:layout_marginEnd="196dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txvRUCCli"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="12dp"
-        android:text="RUC:"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/etxtRUCProv"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txvTituloProv" />
-
+=======
     <TextView
         android:id="@+id/txvCiudadProv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="160dp"
         android:text="Ciudad:"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/etxtRUCProv"
@@ -172,6 +197,75 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txvTituloProv" />
 
+    <EditText
+        android:id="@+id/etxtCiudadProv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="235dp"
+        android:layout_marginEnd="50dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+>>>>>>> main
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+<<<<<<< HEAD
+        android:id="@+id/txvRUCCli"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="12dp"
+        android:text="RUC:"
+=======
+        android:id="@+id/txvCorreoProv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="215dp"
+        android:text="Correo:"
+>>>>>>> main
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/etxtRUCProv"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txvTituloProv" />
+
+<<<<<<< HEAD
+    <TextView
+        android:id="@+id/txvCiudadProv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="120dp"
+        android:text="Ciudad:"
+=======
+    <EditText
+        android:id="@+id/etxtCorreoProv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="290dp"
+        android:layout_marginEnd="50dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txvTelefonoProv"
+        android:layout_width="95dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="270dp"
+        android:text="Telefono:"
+>>>>>>> main
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/etxtRUCProv"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txvTituloProv" />
+
+<<<<<<< HEAD
     <TextView
         android:id="@+id/txvNombreProv"
         android:layout_width="wrap_content"
@@ -184,6 +278,18 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txvTituloProv" />
+=======
+    <EditText
+        android:id="@+id/etxtTelefonoProv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="345dp"
+        android:layout_marginEnd="50dp"
+        android:ems="10"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+>>>>>>> main
 
     <Button
         android:id="@+id/btn_actualizar_editar_Prov"
@@ -192,6 +298,7 @@
         android:text="Aceptar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
         app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -209,5 +316,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.838"
         tools:context=".MapsFragment" />
+=======
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.884" />
+>>>>>>> main
 
 </androidx.constraintlayout.widget.ConstraintLayout>

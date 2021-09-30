@@ -24,8 +24,11 @@ class PEditarProveedor : AppCompatActivity() {
         val correoProveedor = findViewById<EditText>(R.id.etxtCorreoProv)
         val telefonoProveedor = findViewById<EditText>(R.id.etxtTelefonoProv)
         val botonAceptar = findViewById<Button>(R.id.btn_actualizar_editar_Prov)
+<<<<<<< HEAD
         val LatitudProveedor = findViewById<EditText>(R.id.etxtTLatitud)
         val LongitudProveedor = findViewById<EditText>(R.id.etxtLongitud)
+=======
+>>>>>>> main
 
 
         rucProveedor.setText(proveedor?.ruc_prov.toString())
@@ -33,13 +36,20 @@ class PEditarProveedor : AppCompatActivity() {
         ciudadProveedor.setText(proveedor?.ciudad_prov)
         correoProveedor.setText(proveedor?.correo_prov)
         telefonoProveedor.setText(proveedor?.telefono_prov)
+<<<<<<< HEAD
         LatitudProveedor.setText(proveedor?.latitud.toString())
         LongitudProveedor.setText(proveedor?.longitud.toString())
+=======
+>>>>>>> main
 
 
 
 
+<<<<<<< HEAD
         botonAceptar.isEnabled = true
+=======
+        botonAceptar.isEnabled = false
+>>>>>>> main
         botonAceptar
             .setOnClickListener {
 
@@ -55,8 +65,11 @@ class PEditarProveedor : AppCompatActivity() {
         val ciudadProveedor = findViewById<EditText>(R.id.etxtCiudadProv)
         val correoProveedor = findViewById<EditText>(R.id.etxtCorreoProv)
         val telefonoProveedor = findViewById<EditText>(R.id.etxtTelefonoProv)
+<<<<<<< HEAD
         val longitudProveedor = findViewById<EditText>(R.id.etxtLongitud)
         val latitudProveedor = findViewById<EditText>(R.id.etxtTLatitud)
+=======
+>>>>>>> main
 
         var proveedorDto = FirestoreProveedorDto(
             null,
@@ -64,10 +77,14 @@ class PEditarProveedor : AppCompatActivity() {
             nombreProveedor.text.toString(),
             ciudadProveedor.text.toString(),
             correoProveedor.text.toString(),
+<<<<<<< HEAD
             telefonoProveedor.text.toString(),
                     longitudProveedor.text.toString(),
             latitudProveedor.text.toString())
 
+=======
+            telefonoProveedor.text.toString())
+>>>>>>> main
 
 
 
@@ -77,9 +94,12 @@ class PEditarProveedor : AppCompatActivity() {
             "ciudadProveedor" to proveedorDto.ciudad_prov!!,
             "correoProveedor" to proveedorDto.correo_prov!!,
             "telefonoProveedor" to proveedorDto.telefono_prov!!,
+<<<<<<< HEAD
             "longitudProveedor" to proveedorDto.longitud!!,
             "latitudProveedor" to proveedorDto.latitud!!,
 
+=======
+>>>>>>> main
         )
 
         val db = Firebase.firestore
