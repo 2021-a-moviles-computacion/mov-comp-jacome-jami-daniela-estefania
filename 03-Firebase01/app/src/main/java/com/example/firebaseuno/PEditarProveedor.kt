@@ -24,6 +24,8 @@ class PEditarProveedor : AppCompatActivity() {
         val correoProveedor = findViewById<EditText>(R.id.etxtCorreoProv)
         val telefonoProveedor = findViewById<EditText>(R.id.etxtTelefonoProv)
         val botonAceptar = findViewById<Button>(R.id.btn_actualizar_editar_Prov)
+        val LatitudProveedor = findViewById<EditText>(R.id.etxtTLatitud)
+        val LongitudProveedor = findViewById<EditText>(R.id.etxtLongitud)
 
 
         rucProveedor.setText(proveedor?.ruc_prov.toString())
@@ -31,11 +33,13 @@ class PEditarProveedor : AppCompatActivity() {
         ciudadProveedor.setText(proveedor?.ciudad_prov)
         correoProveedor.setText(proveedor?.correo_prov)
         telefonoProveedor.setText(proveedor?.telefono_prov)
+        LatitudProveedor.setText(proveedor?.latitud.toString())
+        LongitudProveedor.setText(proveedor?.longitud.toString())
 
 
 
 
-        botonAceptar.isEnabled = false
+        botonAceptar.isEnabled = true
         botonAceptar
             .setOnClickListener {
 
@@ -51,6 +55,8 @@ class PEditarProveedor : AppCompatActivity() {
         val ciudadProveedor = findViewById<EditText>(R.id.etxtCiudadProv)
         val correoProveedor = findViewById<EditText>(R.id.etxtCorreoProv)
         val telefonoProveedor = findViewById<EditText>(R.id.etxtTelefonoProv)
+        val longitudProveedor = findViewById<EditText>(R.id.etxtLongitud)
+        val latitudProveedor = findViewById<EditText>(R.id.etxtTLatitud)
 
         var proveedorDto = FirestoreProveedorDto(
             null,
@@ -58,7 +64,10 @@ class PEditarProveedor : AppCompatActivity() {
             nombreProveedor.text.toString(),
             ciudadProveedor.text.toString(),
             correoProveedor.text.toString(),
-            telefonoProveedor.text.toString())
+            telefonoProveedor.text.toString(),
+                    longitudProveedor.text.toString(),
+            latitudProveedor.text.toString())
+
 
 
 
@@ -68,6 +77,9 @@ class PEditarProveedor : AppCompatActivity() {
             "ciudadProveedor" to proveedorDto.ciudad_prov!!,
             "correoProveedor" to proveedorDto.correo_prov!!,
             "telefonoProveedor" to proveedorDto.telefono_prov!!,
+            "longitudProveedor" to proveedorDto.longitud!!,
+            "latitudProveedor" to proveedorDto.latitud!!,
+
         )
 
         val db = Firebase.firestore

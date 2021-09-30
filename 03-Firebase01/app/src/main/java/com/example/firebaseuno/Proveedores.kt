@@ -15,23 +15,31 @@ import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat.startActivityForResult
 import com.example.firebaseuno.dto.FirestoreProveedorDto
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class Proveedores : AppCompatActivity() {
 
-    var posicionItemSelecionado = 0
+    var posicionItemSeleccionado = 0
     val CODIGO_RESPUESTA_INTENT_EXPLICITO = 401
 
-    var adapter: ArrayAdapter<*>? = null
+    var adapter: ArrayAdapter<FirestoreProveedorDto>? = null
     var arrayProveedores = arrayListOf<FirestoreProveedorDto>()
+
+    var ubicacionMapa: LatLng? = null
+    private lateinit var mapa: GoogleMap
+    var permisos = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_proveedores)
 
-        val botonIrActividadcrearUsuarioUsuario = findViewById<Button>(R.id.btn_crearProv)
-        botonIrActividadcrearUsuarioUsuario
+
+        val botonPCrearProveedor = findViewById<Button>(R.id.btn_crearProv)
+        botonPCrearProveedor
             .setOnClickListener {
                 abrirActividad(PCrearProveedor::class.java)
             }
@@ -69,13 +77,15 @@ class Proveedores : AppCompatActivity() {
                             proveedor.data["nombreProveedor"].toString(),
                             proveedor.data["ciudadProveedor"].toString(),
                             proveedor.data["correoProveedor"].toString(),
-                            proveedor.data["telefonoProveedor"].toString()
-
+                            proveedor.data["telefonoProveedor"].toString() ,
+                            proveedor.data["latitudProveedor"].toString(),
+                            proveedor.data["longitudProveedor"].toString()
                             )
                     )
 
 
-                    adapter = ArrayAdapter(
+
+                                adapter = ArrayAdapter(
                         this,
                         android.R.layout.simple_list_item_1,
                         arrayProveedores)
@@ -101,13 +111,13 @@ class Proveedores : AppCompatActivity() {
 
         val info = menuInfo as AdapterView.AdapterContextMenuInfo
         val id = info.position
-        posicionItemSelecionado = id
-        val ruc_proveedor = adapter!!.getItem(posicionItemSelecionado)?.ruc_prov!!.toLong()
-        Log.i("list-view", "List view ${posicionItemSelecionado}")
-        Log.i("list-view", "Entrenador ${arrayProveedores[posicionItemSelecionado].nombre_prov} ${arrayProveedores[posicionItemSelecionado].correo_prov}")
+        posicionItemSeleccionado = id
+        //val ruc_proveedor = adapter!!.getItem(posicionItemSeleccionado)?.ruc_prov!!.toLong()
+        Log.i("list-view", "List view ${posicionItemSeleccionado}")
+        Log.i("list-view", "Entrenador ${arrayProveedores[posicionItemSeleccionado].nombre_prov} ${arrayProveedores[posicionItemSeleccionado].correo_prov}")
     }
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        var ProvSelect = arrayProveedores[posicionItemSelecionado]
+        var ProvSelect = arrayProveedores[posicionItemSeleccionado]
 
 
         return when(item?.itemId){
@@ -150,7 +160,7 @@ class Proveedores : AppCompatActivity() {
                 refProv.document(ProvSelect.uid.toString())
                     .delete()
                     .addOnSuccessListener {
-                        adapter?.remove(adapter!!.getItem(posicionItemSelecionado));
+                        adapter?.remove(adapter!!.getItem(posicionItemSeleccionado));
                         adapter?.notifyDataSetChanged()
                         Log.d("list-view", "DocumentSnapshot successfully deleted!")
 
@@ -167,12 +177,18 @@ class Proveedores : AppCompatActivity() {
             R.id.mi_ver_prov -> {
                 abrirActividadParametros(QCliente::class.java,ProvSelect)
 
-                Log.i("list-view","Ver Cliente ${ProvSelect}")
+             //   Log.i("list-view","Ver Cliente ${ProvSelect}")
 
                 return true }
-
+            R.id.mi_ubicacion_prov -> {
+                abrirActividadParametros(FMapsActivity::class.java,ProvSelect)
+                Log.i("list-view","Ubicacion ${ProvSelect.nombre_prov}")
+                return true
+            }
             else -> super.onContextItemSelected(item)
             }
+
+
 
         }
 
@@ -187,7 +203,7 @@ class Proveedores : AppCompatActivity() {
             clase,
         )
         //intentExplicito.putExtra("nombre","Adrian")
-        intentExplicito.putExtra("Proveedor",proveedor)
+        intentExplicito.putExtra("proveedor",proveedor)
         startActivityForResult(intentExplicito,CODIGO_RESPUESTA_INTENT_EXPLICITO)
 
     }

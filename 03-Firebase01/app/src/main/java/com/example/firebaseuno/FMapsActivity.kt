@@ -4,6 +4,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -26,10 +27,14 @@ class FMapsActivity : AppCompatActivity() {
         val botonCarolina = findViewById<Button>(R.id.btn_ir_carolina)
         botonCarolina
             .setOnClickListener {
-                val carolina = LatLng(-0.18288452555103193, -78.48449971346241)
+                val n1 =-0.18288452555103193
+                val n2 = -78.48449971346241
+                val carolina = LatLng(n1,n2 )
                 val zoom = 17f
                 moverCamaraConZoom(carolina, zoom)
             }
+        botonCarolina.visibility = View.INVISIBLE
+
 
         val fragmentoMapa = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
