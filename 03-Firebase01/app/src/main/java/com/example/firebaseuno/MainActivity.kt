@@ -54,6 +54,15 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val botonProveedores = findViewById<Button>(R.id.btn_proveedores)
+        botonProveedores.setOnClickListener {
+            val intent = Intent(
+                this,
+                Proveedores::class.java
+            )
+            startActivity(intent)
+        }
+
         val botonOrden = findViewById<Button>(R.id.btn_ordenes)
         botonOrden.setOnClickListener {
             val intent = Intent(
@@ -192,6 +201,7 @@ class MainActivity : AppCompatActivity() {
         val botonRestaurante = findViewById<Button>(R.id.btn_restaurante)
         val botonOrden = findViewById<Button>(R.id.btn_ordenes)
         val botonMapa = findViewById<Button>(R.id.btn_ir_mapa)
+        val botonProveedor = findViewById<Button>(R.id.btn_proveedores)
 
 
         if(BAuthUsuario.usuario != null){
@@ -202,6 +212,7 @@ class MainActivity : AppCompatActivity() {
             botonRestaurante.visibility = View.VISIBLE
             botonOrden.visibility = View.VISIBLE
             botonMapa.visibility = View.VISIBLE
+            botonProveedor.visibility = View.VISIBLE
 
         }else{
             textViewBienvenida.text = "Ingresa al aplicativo"
@@ -211,6 +222,7 @@ class MainActivity : AppCompatActivity() {
             botonRestaurante.visibility = View.INVISIBLE
             botonOrden.visibility = View.INVISIBLE
             botonMapa.visibility = View.INVISIBLE
+            botonProveedor.visibility = View.INVISIBLE
         }
     }
     fun solicitarSalirDelAplicativo(){
